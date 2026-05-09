@@ -459,6 +459,103 @@
             border-radius: 50px;
         }
 
+        /* ─── IMAGE CAROUSEL ─── */
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--bg2);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(124,58,237,0.15);
+        }
+
+        .carousel-slides {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--bg);
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.8rem;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+            border: 2px solid var(--purple);
+        }
+
+        .carousel-dot.active {
+            background: var(--purple);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(124,58,237,0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover { background: var(--purple); }
+
+        .carousel-nav.prev { left: 1rem; }
+        .carousel-nav.next { right: 1rem; }
+
+        .carousel-counter {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(124,58,237,0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
         /* ─── SKILLS SECTION ─── */
         #skills { background: var(--bg2); }
 
@@ -681,6 +778,7 @@
             .form-row { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .hero-avatar-ring { width: 260px; height: 260px; }
+            .carousel-slide { height: 300px; }
         }
     </style>
 </head>
@@ -715,7 +813,7 @@
             BSc Computing (Hons) &<br>Infrastructure & Networking
         </p>
         <p class="hero-desc">
-            Third-year student at Botho University specialising in Infrastructure Management & Networking. I build applications with Java and C++, develop websites with HTML, CSS & JS, and manage databases with MySQL, Oracle & SQL Server.
+            Third-year student at Botho University specialising in Infrastructure Management & Networking. I build applications with Java and C++, develop websites with HTML, CSS & JS, and manage[...]
         </p>
         <div class="hero-btns">
             <a href="#portfolio" class="btn-primary">View My Projects</a>
@@ -742,7 +840,7 @@
             <span class="section-tag">About Me</span>
             <h2 class="section-title">Computing Student & Developer</h2>
             <p>Hi, I'm Ntoetsi Lenkoane — a third-year student at Botho University pursuing a BSc (Hons) in Computing, specialising in Infrastructure Management and Networking.</p>
-            <p>I develop applications in Java and C++, build websites using HTML, CSS and JavaScript, and integrate databases using MySQL. I've also studied Oracle Database and SQL Server, and I have practical knowledge of Linux and Windows Server 2012 network administration.</p>
+            <p>I develop applications in Java and C++, build websites using HTML, CSS and JavaScript, and integrate databases using MySQL. I've also studied Oracle Database and SQL Server, and I [...]</p>
             <p>I hold a CCNA Certificate of Completion and I'm actively looking for an internship opportunity next semester to apply my skills in a real-world environment.</p>
             <div class="skills-list">
                 <span class="skill-tag">Java</span>
@@ -788,16 +886,48 @@
     </div>
     <div class="projects-grid">
 
+        <!-- JAVA PROJECT WITH CAROUSEL -->
         <div class="project-card">
-            <div class="project-img c1">☕</div>
             <div class="project-info">
-                <h3>Java Desktop Application</h3>
-                <p>A fully functional Java application with a MySQL database backend, featuring data management, user authentication, and a clean graphical interface.</p>
+                <h3>☕ Java Project</h3>
+                <p>A comprehensive Java application showcasing multiple features and functionality. Scroll through the images below to see different aspects of the project.</p>
                 <div class="project-tags">
                     <span class="project-tag">Java</span>
                     <span class="project-tag">MySQL</span>
                     <span class="project-tag">OOP</span>
                     <span class="project-tag">JDBC</span>
+                </div>
+            </div>
+            
+            <!-- CAROUSEL -->
+            <div class="carousel-container">
+                <div class="carousel-slides" id="carousel">
+                    <div class="carousel-slide active"><img src="10.png" alt="Java Project Screenshot 1"></div>
+                    <div class="carousel-slide"><img src="11.png" alt="Java Project Screenshot 2"></div>
+                    <div class="carousel-slide"><img src="12.png" alt="Java Project Screenshot 3"></div>
+                    <div class="carousel-slide"><img src="13.png" alt="Java Project Screenshot 4"></div>
+                    <div class="carousel-slide"><img src="14.png" alt="Java Project Screenshot 5"></div>
+                    <div class="carousel-slide"><img src="15.png" alt="Java Project Screenshot 6"></div>
+                    <div class="carousel-slide"><img src="16.png" alt="Java Project Screenshot 7"></div>
+                    <div class="carousel-slide"><img src="17.png" alt="Java Project Screenshot 8"></div>
+                </div>
+                
+                <div class="carousel-counter">
+                    <span id="current-slide">1</span> / 8
+                </div>
+                
+                <button class="carousel-nav prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-nav next" onclick="nextSlide()">❯</button>
+                
+                <div class="carousel-controls">
+                    <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(1)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(2)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(3)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(4)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(5)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(6)"></span>
+                    <span class="carousel-dot" onclick="goToSlide(7)"></span>
                 </div>
             </div>
         </div>
@@ -985,157 +1115,45 @@
     </div>
 </section>
 
-<style>
-    /* CONTACT INNER */
-    .contact-inner {
-        max-width: 700px;
-        margin: 0 auto;
-        text-align: center;
-        padding: 2rem 1rem;
-    }
-
-    /* CONTACT LINKS */
-    .contact-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
-        margin: 2rem 0;
-    }
-
-    .contact-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, #7c3aed, #a78bfa);
-        color: #fff;
-        padding: 0.55rem 1.2rem;
-        border-radius: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-        font-size: 0.95rem;
-        animation: pulse 2.5s infinite;
-    }
-
-    .contact-btn img {
-        width: 18px;
-        height: 18px;
-    }
-
-    .contact-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.6);
-        animation: none;
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-
-    .pulse-delay-1 { animation-delay: 0s; }
-    .pulse-delay-2 { animation-delay: 0.5s; }
-    .bounce-delay-1 { animation-delay: 0s; }
-    .bounce-delay-2 { animation-delay: 0.7s; }
-
-    /* CONTACT FORM */
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        text-align: left;
-        margin-top: 2rem;
-    }
-
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.12);
-        color: #fff;
-        padding: 1rem 1.2rem;
-        border-radius: 12px;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 0.95rem;
-        outline: none;
-        transition: border-color 0.2s, background 0.2s;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder { color: #9ca3af; }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-        border-color: #a78bfa;
-        background: rgba(167,139,250,0.1);
-    }
-
-    .contact-form textarea { resize: vertical; min-height: 130px; }
-
-    .contact-form button {
-        background: #7c3aed;
-        color: #fff;
-        border: none;
-        padding: 1rem 2.5rem;
-        border-radius: 50px;
-        font-family: 'Syne', sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        align-self: center;
-        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 4px 20px rgba(124,58,237,0.4);
-    }
-
-    .contact-form button:hover {
-        background: #a78bfa;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(124,58,237,0.5);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 500px) {
-        .contact-links { flex-direction: column; gap: 0.8rem; }
-        .contact-btn { width: 100%; justify-content: center; }
-        .form-row { grid-template-columns: 1fr; }
-    }
-</style>
-
 <!-- FOOTER -->
 <footer>
-    <p>© 2026 <span>Ntoetsi Lenkoane</span> · Botho University · BSc Computing (Hons) — Infrastructure & Networking. All rights reserved.</p>
+    <p>&copy; 2026 Ntoetsi Lenkoane. All rights reserved. Built with <span>❤</span> and <span>Code</span></p>
 </footer>
 
 <script>
-    function handleSubmit(e) {
-        e.preventDefault();
-        const btn = e.target.querySelector('button');
-        btn.textContent = 'Message Sent! ✓';
-        btn.style.background = '#10b981';
-        setTimeout(() => {
-            btn.textContent = 'Send Message ✦';
-            btn.style.background = '';
-            e.target.reset();
-        }, 3000);
+    let currentSlide = 0;
+    const totalSlides = 8;
+
+    function showSlide(n) {
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        if (n >= totalSlides) currentSlide = 0;
+        if (n < 0) currentSlide = totalSlides - 1;
+        
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        document.getElementById('current-slide').textContent = currentSlide + 1;
     }
 
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(sec => {
-            if (window.scrollY >= sec.offsetTop - 200) current = sec.getAttribute('id');
-        });
-        navLinks.forEach(a => {
-            a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--purple)' : '';
-        });
-    });
+    function nextSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide--;
+        showSlide(currentSlide);
+    }
+
+    function goToSlide(n) {
+        currentSlide = n;
+        showSlide(currentSlide);
+    }
 </script>
+
 </body>
 </html>
